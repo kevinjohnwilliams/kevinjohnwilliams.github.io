@@ -214,13 +214,13 @@
   .personal-intro p + p { margin-top: 1.2rem; }
 
   .photo-gallery {
-    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 340px 340px;
+    display: grid; grid-template-columns: 1fr 1fr;
     gap: 1rem; margin-bottom: 4rem;
   }
 
   .photo-card { position: relative; overflow: hidden; border: 1px solid var(--border); }
   .photo-card img {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%; height: 400px; object-fit: cover; object-position: top center;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s;
     filter: grayscale(30%) brightness(0.85);
   }
@@ -290,8 +290,8 @@
     .skills-grid { grid-template-columns: 1fr; }
     .edu-grid { grid-template-columns: 1fr; }
     .hero-cta { flex-direction: column; align-items: flex-start; }
-    .photo-gallery { grid-template-columns: 1fr; grid-template-rows: auto; }
-    .photo-gallery .photo-card { height: 300px; }
+    .photo-gallery { grid-template-columns: 1fr; }
+    .photo-gallery .photo-card img { height: 350px; }
     .pillars-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -303,7 +303,7 @@
 <div class="ambient-glow two"></div>
 
 <nav>
-  <div class="nav-logo">KW.</div>
+  <div class="nav-logo">KW</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -348,7 +348,7 @@
           I'm a Software Engineer at Barrios Technology supporting NASA at Johnson Space Center, where I architect Django-based enterprise systems that replace legacy workflows for human spaceflight operations. My flagship system, Cortex, uses Entity-Attribute-Value architecture to provide flexible, mission-critical data management.
         </p>
         <p>
-          My work sits at the intersection of AI safety and aerospace engineering — I've developed AI-specific certification requirements that supplement NASA's NPR 7150.2D software engineering standard, earning a NASA Silver Bear award. I'm passionate about ensuring AI systems meet the rigorous standards demanded by safety-critical domains.
+          My work sits at the intersection of AI safety and aerospace engineering, I've developed AI-specific certification requirements that supplement NASA's NPR 7150.2D software engineering standard, earning a NASA Silver Bear award. I'm passionate about ensuring AI systems meet the rigorous standards demanded by safety-critical domains.
         </p>
         <p>
           Previously at Ford Motor Company, I implemented deep learning models for manufacturing quality decisions, earning a Technical Excellence Award. I bring a unique perspective from bridging automotive and aerospace industries with AI.
@@ -548,10 +548,10 @@
 
     <div class="personal-intro">
       <p>
-        Engineering is what I do. But who I am runs deeper. I'm driven by a quiet, relentless pull toward something greater — the dream of becoming an astronaut, of standing at the edge of what humanity knows and pushing further. Every line of code I write at NASA, every system I build, every hour I spend studying AI — it's all pointed at that horizon.
+        Engineering is what I do. But who I am runs deeper. I'm driven by a quiet, relentless pull toward something greater the dream of becoming an astronaut, of standing at the edge of what humanity knows and pushing further. Every line of code I write at NASA, every system I build, every hour I spend studying AI it's all pointed at that horizon.
       </p>
       <p>
-        But the path isn't just technical. I believe the people we send to space need to carry more than expertise — they need depth. That's why I invest just as heavily in understanding myself as I do in understanding machines. I study philosophy. I think deeply about what it means to be kind versus merely nice, about faith and conscience, about the nature of love. These aren't distractions from engineering — they're the foundation.
+        But the path isn't just technical. I believe the people we send to space need to carry more than expertise they need depth. That's why I invest just as heavily in understanding myself as I do in understanding machines. I study philosophy. I think deeply about what it means to be kind versus merely nice, about faith and conscience, about the nature of love. These aren't distractions from engineering — they're the foundation.
       </p>
       <p>
         I train every single day. Not for aesthetics — for discipline, for resilience, for the daily practice of choosing something hard when something easy is available. The gym is where I sharpen the same willpower I bring to everything else.
@@ -613,7 +613,7 @@
         <div class="pillar-emoji">🏋️</div>
         <div class="pillar-title">Daily Discipline</div>
         <div class="pillar-text">
-          I train every day without exception. The gym isn't about the body — it's about building the kind of person who shows up when it's hard, who doesn't negotiate with resistance.
+          I train every day without exception. The gym isn't about the body, it's about building the kind of person who shows up when it's hard, who doesn't negotiate with resistance.
         </div>
       </div>
       <div class="pillar-card">
@@ -628,7 +628,7 @@
     <!-- Philosophy Quote -->
     <div class="philosophy-block">
       <div class="philosophy-quote">
-        "Love is the quiet recognition of something shared — the same light within another. It needs no claim, no ownership, no proof. It is the soft awareness that what is most essential in you is also alive in them."
+        "Love is the quiet recognition of something shared, the same light within another. It needs no claim, no ownership, no proof. It is the soft awareness that what is most essential in you is also alive in them."
       </div>
       <div class="philosophy-attribution">— From my personal reflections</div>
     </div>
