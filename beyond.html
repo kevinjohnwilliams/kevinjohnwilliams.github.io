@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin Williams | Beyond the Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #111118;
+    --bg-card: #16161f;
+    --accent: #00d4aa;
+    --accent-dim: #00d4aa22;
+    --accent-glow: #00d4aa44;
+    --text-primary: #e8e8ed;
+    --text-secondary: #8888a0;
+    --text-muted: #55556a;
+    --border: #222233;
+    --orange: #ff6b35;
+    --blue: #4a9eff;
+    --warm: #c4956a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .grid-bg {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px; opacity: 0.15; pointer-events: none; z-index: 0;
+  }
+
+  .ambient-glow {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    filter: blur(150px); opacity: 0.08; pointer-events: none; z-index: 0;
+  }
+  .ambient-glow.one { top: -200px; right: -100px; background: var(--warm); }
+  .ambient-glow.two { bottom: -200px; left: -100px; background: var(--blue); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(20px); background: rgba(10, 10, 15, 0.7); border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--accent); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s; position: relative; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.nav-page { color: var(--orange); }
+  .nav-links a.nav-page.active { color: var(--accent); }
+  .nav-links a.nav-page:hover { color: var(--accent); }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 3rem; position: relative; z-index: 1; }
+
+  .page-hero {
+    padding-top: 140px;
+    padding-bottom: 4rem;
+  }
+
+  .page-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm);
+    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+  .page-label::before { content: ''; width: 40px; height: 1px; background: var(--warm); }
+
+  .page-title {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .page-intro {
+    font-family: 'Source Serif 4', serif; font-size: 1.2rem; font-weight: 300;
+    color: var(--text-secondary); max-width: 650px; line-height: 1.8;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  section { padding: 4rem 0; }
+
+  .section-label {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--warm);
+    margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--warm); }
+
+  .section-title {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    letter-spacing: -0.02em; margin-bottom: 2rem;
+  }
+
+  /* Pillar Cards */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .pillar-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: all 0.4s;
+  }
+
+  .pillar-card:hover {
+    border-color: var(--warm);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(196, 149, 106, 0.1);
+  }
+
+  .pillar-emoji { font-size: 2rem; margin-bottom: 1rem; }
+
+  .pillar-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .pillar-text {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+
+  /* Philosophy Blocks */
+  .philosophy-block {
+    padding: 3rem;
+    border-left: 3px solid var(--warm);
+    background: var(--bg-card);
+    margin: 3rem 0;
+  }
+
+  .philosophy-quote {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .philosophy-attribution {
+    font-size: 0.8rem;
+    color: var(--warm);
+    letter-spacing: 0.05em;
+  }
+
+  /* Reflection prose */
+  .reflection {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    max-width: 700px;
+  }
+
+  .reflection p + p { margin-top: 1.5rem; }
+
+  /* Divider */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--warm), transparent);
+    margin: 4rem 0;
+  }
+
+  /* Back link */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    margin-top: 4rem;
+    padding-bottom: 6rem;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  footer {
+    padding: 2rem 3rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.7rem; color: var(--text-muted);
+  }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.65rem; }
+    .container { padding: 0 1.5rem; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .philosophy-block { padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="ambient-glow one"></div>
+<div class="ambient-glow two"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">KW.</a>
+  <ul class="nav-links">
+    <li><a href="index.html#why">Why</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#path">Path</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="beyond.html" class="nav-page active">Beyond the Code</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <div class="page-hero">
+    <div class="page-label">The Person Behind the Work</div>
+    <h1 class="page-title">Beyond the Code</h1>
+    <p class="page-intro">
+      Engineering is what I do. But it's not all of who I am. This page is about the things that shape how I think, why I care about the work I do, and what I'm building toward beyond any job title.
+    </p>
+  </div>
+
+  <!-- What Grounds Me -->
+  <section class="fade-in">
+    <div class="section-label">What Grounds Me</div>
+    <h2 class="section-title">The Pillars</h2>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-emoji">🏋️</div>
+        <div class="pillar-title">Training</div>
+        <div class="pillar-text">
+          Every day, no exceptions. It's less about fitness and more about practice — showing up when you don't feel like it, doing the hard thing because it's hard. The discipline I build in the gym is the same discipline I bring to everything else.
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-emoji">📖</div>
+        <div class="pillar-title">Philosophy</div>
+        <div class="pillar-text">
+          I think about love, kindness, faith, and what it means to live well. Not because I have answers — because the questions are worth sitting with. The way I approach engineering problems starts here.
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-emoji">🎵</div>
+        <div class="pillar-title">Music</div>
+        <div class="pillar-text">
+          I produce and play. Music is the one place where structure and feeling aren't at odds — they need each other. It's a different kind of problem-solving, and it keeps me creative in ways code can't.
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-emoji">🚀</div>
+        <div class="pillar-title">The Dream</div>
+        <div class="pillar-text">
+          I still want to be an astronaut. I don't know if it'll happen, but I know every piece of work I do — the AI safety, the systems engineering, the physical training — is pointed in that direction. The work matters either way.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Philosophy -->
+  <section class="fade-in">
+    <div class="section-label">On What Matters</div>
+    <h2 class="section-title">Reflections</h2>
+
+    <div class="reflection">
+      <p>
+        I believe the work you do should come from something deeper than ambition. Ambition gets you moving, but conviction is what keeps you honest when the work gets hard or the path gets unclear. Every project I've taken on — from THC detection to AI certification — started because I saw something that bothered me and felt a responsibility to try.
+      </p>
+      <p>
+        I think about the relationship between technology and human dignity a lot. AI has the potential to be the most powerful tool humanity has ever built, and that means the people building it carry a real weight. Social media showed us what happens when powerful technology optimizes for engagement instead of wellbeing. I don't want to be part of repeating that mistake.
+      </p>
+      <p>
+        At the same time, I try not to take myself too seriously. I'm still figuring things out. I'm a student. I make music. I train hard because it keeps me grounded. The best version of me isn't the one with the most impressive resume — it's the one who shows up for the people around him and does work he can be proud of.
+      </p>
+    </div>
+
+    <div class="philosophy-block">
+      <div class="philosophy-quote">
+        "Love is the quiet recognition of something shared — the same light within another. It needs no claim, no ownership, no proof. It is the soft awareness that what is most essential in you is also alive in them."
+      </div>
+      <div class="philosophy-attribution">— From my own reflections</div>
+    </div>
+
+    <div class="reflection">
+      <p>
+        I don't have social media. That's intentional. I'd rather be known for what I build and how I treat people than for a curated online presence. This website exists because I think there's value in sharing who you are honestly — but on your own terms, in your own space.
+      </p>
+      <p>
+        If any of this resonates, or if you just want to talk about philosophy, AI ethics, space, or music — I'm always open to a good conversation.
+      </p>
+    </div>
+  </section>
+
+  <a href="index.html" class="back-link">← Back to the work</a>
+
+</div>
+
+<footer>
+  <span>&copy; 2026 Kevin Williams. All rights reserved.</span>
+  <span>Built with purpose.</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
