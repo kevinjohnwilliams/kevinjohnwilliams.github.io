@@ -93,6 +93,8 @@
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
   .about-text { font-family: 'Source Serif 4', serif; font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; }
   .about-text p + p { margin-top: 1.2rem; }
+  .path-photo { width: 100%; aspect-ratio: 3/2; object-fit: cover; object-position: center 20%; border: 1px solid var(--border); margin-bottom: 2rem; filter: grayscale(20%); transition: filter 0.4s; }
+  .path-photo:hover { filter: grayscale(0%); }
   .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   .stat-card { padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-card); transition: all 0.4s; }
   .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 30px var(--accent-dim); }
@@ -163,6 +165,7 @@
     .scroll-indicator { bottom: 1.5rem; }
     .section-intro { font-size: 1rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .path-photo { aspect-ratio: 4/3; }
     .about-stats { grid-template-columns: 1fr 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
     .edu-grid { grid-template-columns: 1fr; }
@@ -322,6 +325,7 @@
   <section id="path" class="fade-in">
     <div class="section-label">04 &mdash; The Path</div>
     <h2 class="section-title">How I Got Here</h2>
+    <img src="images/jsc.jpeg" alt="Kevin at NASA Johnson Space Center with Saturn V rocket" class="path-photo">
     <div class="about-grid" style="margin-bottom: 4rem;">
       <div class="about-text">
         <p>I did not take a straight line to get here, and I think that is the point. I started in metallurgical labs at Hyundai-Kia, GM, and Quaker Chemicals. Learning how materials fail, how quality works at scale, and how to run a lab. That hands-on foundation changed how I think about engineering.</p>
