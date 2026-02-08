@@ -1,2 +1,2 @@
-# Williams-Umich.github.io
+# kevinjohnwilliams.github.io
 Personal portfolio site
