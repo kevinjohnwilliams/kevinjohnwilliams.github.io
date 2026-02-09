@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kevin Williams | Problem-Solver Across Disciplines</title>
+<title>Kevin | Software Engineer & AI Researcher</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -20,445 +20,1180 @@
     --orange: #ff6b35;
     --blue: #4a9eff;
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   html { scroll-behavior: smooth; }
-  body { font-family: 'IBM Plex Mono', monospace; background: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; line-height: 1.6; }
-  body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; }
-  .grid-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.15; pointer-events: none; z-index: 0; }
-  .ambient-glow { position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(150px); opacity: 0.08; pointer-events: none; z-index: 0; }
+
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Grid background */
+  .grid-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ambient glow */
+  .ambient-glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
   .ambient-glow.one { top: -200px; right: -100px; background: var(--accent); }
   .ambient-glow.two { bottom: -200px; left: -100px; background: var(--blue); }
 
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(20px); background: rgba(10, 10, 15, 0.7); border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--accent); text-decoration: none; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s; position: relative; }
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 15, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
   .nav-links a:hover { color: var(--accent); }
-  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+
   .nav-links a:hover::after { width: 100%; }
-  .nav-links a.nav-page { color: var(--orange); }
-  .nav-links a.nav-page:hover { color: var(--accent); }
 
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 3rem; position: relative; z-index: 1; }
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; position: relative; overflow: hidden; }
-  .hero-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
-  .hero-label::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
-  .hero-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
-  .hero-title .highlight { background: linear-gradient(135deg, var(--accent), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero-subtitle { font-family: 'Source Serif 4', serif; font-size: 1.25rem; font-weight: 300; color: var(--text-secondary); max-width: 600px; line-height: 1.7; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
-  .hero-cta { display: flex; gap: 1rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
-  .btn { padding: 0.8rem 2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); color: var(--text-primary); background: transparent; cursor: pointer; transition: all 0.3s; }
-  .btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 20px var(--accent-dim); }
-  .btn.primary { background: var(--accent); color: var(--bg-primary); border-color: var(--accent); font-weight: 500; }
-  .btn.primary:hover { background: transparent; color: var(--accent); }
-  .scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 1.2s; }
-  .scroll-indicator span { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
-  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 2s ease infinite; }
-  @keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(0.5); } 50% { opacity: 1; transform: scaleY(1); } }
+  /* Container */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    position: relative;
+    z-index: 1;
+  }
 
-  section { padding: 6rem 0; }
-  .section-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
-  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
-  .section-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-  .section-intro { font-family: 'Source Serif 4', serif; font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8; max-width: 700px; margin-bottom: 3rem; }
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 80px;
+  }
 
-  .conviction-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-  .conviction-card { display: grid; grid-template-columns: auto 1fr; gap: 2rem; padding: 2.5rem; border: 1px solid var(--border); background: var(--bg-card); transition: all 0.4s; }
-  .conviction-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px var(--accent-dim); }
-  .conviction-number { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3rem; color: var(--accent); opacity: 0.3; line-height: 1; }
-  .conviction-content h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; }
-  .conviction-problem { font-size: 0.8rem; color: var(--orange); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 500; }
-  .conviction-content p { font-family: 'Source Serif 4', serif; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75; }
-  .conviction-outcome { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .outcome-tag { font-size: 0.65rem; letter-spacing: 0.05em; padding: 0.3rem 0.7rem; border: 1px solid var(--accent-dim); color: var(--accent); text-transform: uppercase; }
+  .hero-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
 
-  .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .approach-card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-card); transition: all 0.4s; }
-  .approach-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 30px var(--accent-dim); }
-  .approach-icon { font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent); }
-  .approach-card h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem; }
-  .approach-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; }
+  .hero-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+  }
 
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-  .project-card { border: 1px solid var(--border); background: var(--bg-card); padding: 2rem; transition: all 0.4s; position: relative; overflow: hidden; }
-  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--blue)); opacity: 0; transition: opacity 0.3s; }
-  .project-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 12px 40px var(--accent-dim); }
-  .project-card:hover::before { opacity: 1; }
-  .project-problem-label { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.5rem; font-weight: 500; }
-  .project-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; margin-bottom: 0.5rem; }
-  .project-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.2rem; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .tag { font-size: 0.65rem; letter-spacing: 0.05em; padding: 0.3rem 0.7rem; border: 1px solid var(--border); color: var(--text-muted); text-transform: uppercase; }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
 
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .about-text { font-family: 'Source Serif 4', serif; font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; }
+  .hero-title .highlight {
+    background: linear-gradient(135deg, var(--accent), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 550px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .btn {
+    padding: 0.8rem 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-dim);
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    color: var(--bg-primary);
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .btn.primary:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.2s;
+  }
+
+  .scroll-indicator span {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* Section styling */
+  section {
+    padding: 6rem 0;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
   .about-text p + p { margin-top: 1.2rem; }
-  .path-photo { width: 100%; max-height: 650px; object-fit: cover; object-position: center bottom; border: 1px solid var(--border); margin-bottom: 2rem; filter: grayscale(20%); transition: filter 0.4s; }
-  .path-photo:hover { filter: grayscale(0%); }
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .stat-card { padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-card); transition: all 0.4s; }
-  .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 30px var(--accent-dim); }
-  .stat-number { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); margin-bottom: 0.3rem; }
-  .stat-label { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
 
-  .timeline { position: relative; padding-left: 3rem; }
-  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), var(--border), transparent); }
-  .timeline-item { position: relative; padding-bottom: 3rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s ease forwards; }
-  .timeline-item:nth-child(1) { animation-delay: 0.1s; } .timeline-item:nth-child(2) { animation-delay: 0.2s; } .timeline-item:nth-child(3) { animation-delay: 0.3s; } .timeline-item:nth-child(4) { animation-delay: 0.4s; }
-  .timeline-item::before { content: ''; position: absolute; left: -3rem; top: 6px; width: 9px; height: 9px; border: 2px solid var(--accent); background: var(--bg-primary); transform: translateX(-4px) rotate(45deg); }
-  .timeline-date { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-  .timeline-role { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.2rem; }
-  .timeline-company { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; }
-  .timeline-desc { font-family: 'Source Serif 4', serif; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; max-width: 600px; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
 
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  .skill-group h3 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
-  .skill-item { font-size: 0.85rem; color: var(--text-secondary); padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; }
+  .stat-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: all 0.4s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px var(--accent-dim);
+  }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Experience Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--border), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3rem;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border: 2px solid var(--accent);
+    background: var(--bg-primary);
+    transform: translateX(-4px) rotate(45deg);
+  }
+
+  .timeline-date {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-company {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+  }
+
+  .timeline-desc {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    padding: 2rem;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--blue));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px var(--accent-dim);
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    color: var(--accent);
+    font-size: 1.1rem;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .skill-group h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-item {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+  }
+
   .skill-item:hover { color: var(--text-primary); }
-  .skill-item::before { content: '\2192'; color: var(--text-muted); font-size: 0.7rem; }
 
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .edu-card { padding: 2rem; border: 1px solid var(--border); background: var(--bg-card); transition: all 0.4s; }
-  .edu-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-  .edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
-  .edu-school { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.3rem; }
-  .edu-year { font-size: 0.75rem; color: var(--text-muted); }
+  .skill-item::before {
+    content: 'â†’';
+    color: var(--text-muted);
+    font-size: 0.7rem;
+  }
 
-  .awards-list { display: flex; flex-direction: column; gap: 1.2rem; }
-  .award-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-card); transition: all 0.3s; }
-  .award-item:hover { border-color: var(--orange); transform: translateX(4px); }
-  .award-icon { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
-  .award-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
-  .award-org { font-size: 0.8rem; color: var(--text-secondary); }
+  /* Education */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
 
-  .contact-section { padding: 6rem 0; text-align: center; }
-  .contact-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.03em; margin-bottom: 1rem; }
-  .contact-sub { font-family: 'Source Serif 4', serif; font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
-  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  .contact-link { padding: 0.8rem 2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); color: var(--text-primary); transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; }
-  .contact-link:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 20px var(--accent-dim); }
+  .edu-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: all 0.4s;
+  }
 
-  footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: var(--text-muted); }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
-  /* Mobile: hamburger menu + responsive layout */
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; z-index: 101; background: none; border: none; }
-  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-secondary); transition: all 0.3s; }
-  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-  .hamburger.active span:nth-child(2) { opacity: 0; }
-  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .edu-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
 
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-year {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* Awards */
+  .awards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .award-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: all 0.3s;
+  }
+
+  .award-item:hover {
+    border-color: var(--orange);
+    transform: translateX(4px);
+  }
+
+  .award-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .award-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .award-org {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  /* Certifications Grid */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-card {
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .cert-card:hover {
+    border-color: var(--blue);
+    transform: translateX(4px);
+    box-shadow: 0 4px 20px rgba(74, 158, 255, 0.1);
+  }
+
+  .cert-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cert-card:hover .cert-icon {
+    border-color: var(--blue);
+  }
+
+  .cert-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+    line-height: 1.3;
+  }
+
+  .cert-issuer {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+  }
+
+  .cert-date {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .cert-link-hint {
+    font-size: 0.6rem;
+    color: var(--blue);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-left: auto;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .cert-card:hover .cert-link-hint {
+    opacity: 1;
+  }
+
+  /* Publication Card */
+  .pub-card {
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pub-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--blue));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .pub-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px var(--accent-dim);
+  }
+
+  .pub-card:hover::before { opacity: 1; }
+
+  .pub-type {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .pub-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .pub-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .pub-link-hint {
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .pub-card:hover .pub-link-hint { opacity: 1; }
+
+  .subsection-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Contact */
+  .contact-section {
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .contact-sub {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    padding: 0.8rem 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-dim);
+  }
+
+  /* Footer */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
-    .hamburger { display: flex; }
-    .nav-links {
-      position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
-      flex-direction: column; background: var(--bg-secondary); padding: 5rem 2rem 2rem;
-      gap: 1.5rem; transition: right 0.3s ease; border-left: 1px solid var(--border);
-    }
-    .nav-links.open { right: 0; }
-    .nav-links a { font-size: 0.85rem; }
+    .nav-links { gap: 1rem; }
     .container { padding: 0 1.5rem; }
-    .hero-title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
-    .hero-subtitle { font-size: 1.05rem; }
-    .scroll-indicator { bottom: 1.5rem; }
-    .section-intro { font-size: 1rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .path-photo { aspect-ratio: auto; max-height: 400px; }
-    .about-stats { grid-template-columns: 1fr 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
     .edu-grid { grid-template-columns: 1fr; }
-    .approach-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
     .hero-cta { flex-direction: column; align-items: flex-start; }
-    .conviction-card { grid-template-columns: 1fr; gap: 1rem; }
-    .conviction-number { font-size: 2rem; }
-    .contact-title { font-size: clamp(2rem, 6vw, 3rem); }
-    .contact-links { flex-direction: column; align-items: center; }
-    .timeline { padding-left: 2rem; }
-    .timeline-item::before { left: -2rem; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
   }
 </style>
 </head>
 <body>
+
 <div class="grid-bg"></div>
 <div class="ambient-glow one"></div>
 <div class="ambient-glow two"></div>
 
 <nav>
-  <a href="index.html" class="nav-logo">KW.</a>
-  <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active');document.querySelector('.nav-links').classList.toggle('open');">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-logo">K.</div>
   <ul class="nav-links">
-    <li><a href="#why">Why</a></li>
-    <li><a href="#approach">Approach</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#path">Path</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="beyond.html" class="nav-page">Beyond the Code</a></li>
   </ul>
 </nav>
 
 <div class="container">
+
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-label">Engineer &middot; Researcher &middot; Problem-Solver</div>
-    <h1 class="hero-title">I find problems<br><span class="highlight">worth solving</span><br>and build teams to solve them.</h1>
-    <p class="hero-subtitle">I am Kevin, a software engineer and AI researcher who works across mechanical engineering, software, and artificial intelligence. I do not start with a technology. I start with a problem that matters, then figure out what it takes to fix it.</p>
+    <div class="hero-label">Software Engineer Â· AI Researcher</div>
+    <h1 class="hero-title">
+      Building the<br>
+      <span class="highlight">future of AI</span><br>
+      in aerospace.
+    </h1>
+    <p class="hero-subtitle">
+      Software Engineer at NASA Johnson Space Center, developing safety-critical AI systems for human spaceflight. Pursuing an M.S. in Artificial Intelligence at the University of Michigan.
+    </p>
     <div class="hero-cta">
-      <a href="#why" class="btn primary">See What Drives Me</a>
+      <a href="#projects" class="btn primary">View Projects</a>
       <a href="#contact" class="btn">Get in Touch</a>
     </div>
-    <div class="scroll-indicator"><span>Scroll</span><div class="scroll-line"></div></div>
-  </section>
-
-  <section id="why" class="fade-in">
-    <div class="section-label">01 &mdash; Why I Do This</div>
-    <h2 class="section-title">Conviction First, Technology Second</h2>
-    <p class="section-intro">Every project I take on starts the same way. I see something broken, something that is hurting people, and I can not look away. The tools change. The disciplines change. The reason never does.</p>
-    <div class="conviction-grid">
-      <div class="conviction-card">
-        <div class="conviction-number">01</div>
-        <div class="conviction-content">
-          <div class="conviction-problem">The problem: An opioid crisis destroying communities</div>
-          <h3>Building a Case for Safer Alternatives</h3>
-          <p>I watched oxycontin tear through communities. People I knew, families around me. When I got the chance to do research at Michigan, I chose to work on electrochemical THC detection not because biosensing was trendy, but because I believed in building the scientific foundation for cannabis as a legitimate, testable alternative to opioids. If law enforcement and policymakers could detect and regulate it reliably, it could be legalized responsibly. That was the point. Give people a safer option and give society the tools to manage it.</p>
-          <div class="conviction-outcome">
-            <span class="outcome-tag">Published Research</span>
-            <span class="outcome-tag">Novel Detection Method</span>
-            <span class="outcome-tag">0.13 &mu;M Detection Limit</span>
-          </div>
-        </div>
-      </div>
-      <div class="conviction-card">
-        <div class="conviction-number">02</div>
-        <div class="conviction-content">
-          <div class="conviction-problem">The problem: AI repeating social media's mistakes</div>
-          <h3>Making AI a Net Positive for Humanity</h3>
-          <p>Social media promised to connect us and instead optimized for addiction, polarization, and anxiety. I see AI heading toward the same crossroads. Immense potential, but only if we get the deployment right. That is why I moved into AI safety and certification at NASA. Not to slow AI down, but to build the frameworks that make sure when we put AI on a spacecraft carrying humans, or into any safety-critical system, it actually earns the trust we are placing in it. I want to be part of making sure this technology is a net contribution to society, not a repeat of what social media did to us.</p>
-          <div class="conviction-outcome">
-            <span class="outcome-tag">NASA Silver Bear Award</span>
-            <span class="outcome-tag">AI Certification Framework</span>
-            <span class="outcome-tag">NPR 7150.2D Supplement</span>
-          </div>
-        </div>
-      </div>
-      <div class="conviction-card">
-        <div class="conviction-number">03</div>
-        <div class="conviction-content">
-          <div class="conviction-problem">The problem: Legacy systems slowing down human spaceflight</div>
-          <h3>Replacing Bureaucratic Friction with Real Tools</h3>
-          <p>At NASA, I saw teams wrestling with SharePoint workflows that were never designed for the complexity of human spaceflight operations. Data was scattered, processes were manual, and people were spending hours on formatting instead of engineering. So I built Cortex. Not because I love enterprise software, but because the people doing the hardest work in aerospace deserved better tools. I architected a flexible platform that lets non-technical users define their own data structures and automated away the busywork so engineers could focus on the mission.</p>
-          <div class="conviction-outcome">
-            <span class="outcome-tag">Cortex Platform</span>
-            <span class="outcome-tag">~40% IT Backlog Reduction</span>
-            <span class="outcome-tag">~20 hrs/week Saved</span>
-          </div>
-        </div>
-      </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
     </div>
   </section>
 
-  <section id="approach" class="fade-in">
-    <div class="section-label">02 &mdash; How I Work</div>
-    <h2 class="section-title">Cross-Disciplinary by Nature</h2>
-    <p class="section-intro">I have worked in metallurgical labs, automotive factories, university research labs, and NASA mission control rooms. That range is not random. It is how I operate. The best solutions come from pulling the right knowledge from different worlds.</p>
-    <div class="approach-grid">
-      <div class="approach-card">
-        <div class="approach-icon">&#x25CE;</div>
-        <h3>See the Real Problem</h3>
-        <p>Most technical problems are actually people problems, process problems, or incentive problems wearing a technical disguise. I dig past the surface to understand what is actually broken before I write a line of code.</p>
-      </div>
-      <div class="approach-card">
-        <div class="approach-icon">&#x27D0;</div>
-        <h3>Build the Right Team</h3>
-        <p>I have led lab teams of 20 at Ford, coordinated across NASA programs, and collaborated with cross-functional suppliers. I know that the person who solves the problem is often not the person who found it. My job is to connect the right people and give them the right tools.</p>
-      </div>
-      <div class="approach-card">
-        <div class="approach-icon">&#x25B3;</div>
-        <h3>Bridge the Domains</h3>
-        <p>Mechanical engineering taught me how physical systems fail. Software engineering taught me how to build systems that scale. AI research taught me what these systems can, and can not, be trusted to do. I bring all three to every problem.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="work" class="fade-in">
-    <div class="section-label">03 &mdash; The Work</div>
-    <h2 class="section-title">Problems I've Tackled</h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-problem-label">Spaceflight operations bottleneck</div>
-        <div class="project-name">Cortex Platform</div>
-        <div class="project-desc">Built a Django-based enterprise platform with Entity-Attribute-Value architecture that replaced scattered SharePoint workflows for NASA's human spaceflight operations. Non-technical users can define custom data structures without code changes, and automated pipelines turn unstructured inputs into validated, structured data.</div>
-        <div class="project-tags"><span class="tag">Django</span><span class="tag">Python</span><span class="tag">EAV</span><span class="tag">Flutter</span></div>
-      </div>
-      <div class="project-card">
-        <div class="project-problem-label">No safety standards for AI in space</div>
-        <div class="project-name">AI Certification Framework</div>
-        <div class="project-desc">Pioneered the first-generation certification framework for AI on human-rated spacecraft. Addresses bias detection, continuous validation, hallucination prevention, and human-AI teaming. Now guiding AI deployment across Artemis mission elements and being generalized for publication.</div>
-        <div class="project-tags"><span class="tag">AI Safety</span><span class="tag">NPR 7150.2D</span><span class="tag">V&amp;V</span><span class="tag">Governance</span></div>
-      </div>
-      <div class="project-card">
-        <div class="project-problem-label">Astronaut cognitive monitoring vs. privacy</div>
-        <div class="project-name">Cognitive Twin System</div>
-        <div class="project-desc">Developed a privacy-preserving cognitive readiness prediction system for astronaut monitoring using physiological data. Implemented differential privacy and defended against membership inference attacks. Because monitoring astronaut health should not mean sacrificing their privacy.</div>
-        <div class="project-tags"><span class="tag">ML</span><span class="tag">Privacy</span><span class="tag">Biosignals</span><span class="tag">Python</span></div>
-      </div>
-      <div class="project-card">
-        <div class="project-problem-label">Opioid crisis needed alternatives</div>
-        <div class="project-name">Electrochemical THC Detection</div>
-        <div class="project-desc">Published research on a novel electrochemical detection method for &Delta;9-THC achieving 0.13 &mu;M limit of detection. The third-lowest among comparable devices. Built to give law enforcement a reliable field tool that could support responsible cannabis legalization as an opioid alternative.</div>
-        <div class="project-tags"><span class="tag">Research</span><span class="tag">Electrochemistry</span><span class="tag">Publication</span></div>
-      </div>
-      <div class="project-card">
-        <div class="project-problem-label">90% of inspection time was manual</div>
-        <div class="project-name">Deep Learning Quality System</div>
-        <div class="project-desc">At Ford, I deployed deep learning models for automated quality decisions in eMotor manufacturing. Reduced manual inspection time by ~90% and earned a Technical Excellence Award. Proved that AI in manufacturing is not about replacing people. It is about freeing them to do higher-value work.</div>
-        <div class="project-tags"><span class="tag">Deep Learning</span><span class="tag">Manufacturing</span><span class="tag">Quality</span><span class="tag">Ford</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="path" class="fade-in">
-    <div class="section-label">04 &mdash; The Path</div>
-    <h2 class="section-title">How I Got Here</h2>
-    <img src="images/jsc.jpeg" alt="Kevin at NASA Johnson Space Center with Saturn V rocket" class="path-photo">
-    <div class="about-grid" style="margin-bottom: 4rem;">
+  <!-- About -->
+  <section id="about" class="fade-in">
+    <div class="section-label">01 â€” About</div>
+    <h2 class="section-title">Mission-Driven Engineer</h2>
+    <div class="about-grid">
       <div class="about-text">
-        <p>I did not take a straight line to get here, and I think that is the point. I started in metallurgical labs at Hyundai-Kia, GM, and Quaker Chemicals. Learning how materials fail, how quality works at scale, and how to run a lab. That hands-on foundation changed how I think about engineering.</p>
-        <p>A mechanical engineering degree at Michigan gave me the theory. Research on THC detection gave me the first taste of work that actually mattered to me. Science driven by wanting to help people, not just publish papers.</p>
-        <p>Ford taught me how to deploy AI in production. Real models, real stakes, real people depending on the output. And now at NASA, I get to work on the hardest version of that question: how do you trust AI with human lives?</p>
-        <p>I am finishing my M.S. in AI at Michigan because I believe in understanding the tools deeply enough to know their limits. And honestly, because I still want to be an astronaut someday.</p>
+        <p>
+          I'm a Software Engineer at Barrios Technology supporting NASA at Johnson Space Center, where I architect Django-based enterprise systems that replace legacy workflows for human spaceflight operations. My flagship system, Cortex, uses Entity-Attribute-Value architecture to provide flexible, mission-critical data management.
+        </p>
+        <p>
+          My work sits at the intersection of AI safety and aerospace engineering â€” I've developed AI-specific certification requirements that supplement NASA's NPR 7150.2D software engineering standard, earning a NASA Silver Bear award. I'm passionate about ensuring AI systems meet the rigorous standards demanded by safety-critical domains.
+        </p>
+        <p>
+          Previously at Ford Motor Company, I implemented deep learning models for manufacturing quality decisions, earning a Technical Excellence Award. I bring a unique perspective from bridging automotive and aerospace industries with AI.
+        </p>
       </div>
       <div class="about-stats">
-        <div class="stat-card"><div class="stat-number">NASA</div><div class="stat-label">Johnson Space Center</div></div>
-        <div class="stat-card"><div class="stat-number">M.S.</div><div class="stat-label">AI, UMich (2026)</div></div>
-        <div class="stat-card"><div class="stat-number">&#127942;</div><div class="stat-label">NASA Silver Bear</div></div>
-        <div class="stat-card"><div class="stat-number">B.S.</div><div class="stat-label">MechE, UMich (2021)</div></div>
+        <div class="stat-card">
+          <div class="stat-number">NASA</div>
+          <div class="stat-label">Johnson Space Center</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">M.S.</div>
+          <div class="stat-label">AI â€” UMich (2026)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">ðŸ†</div>
+          <div class="stat-label">NASA Silver Bear</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">B.S.</div>
+          <div class="stat-label">MechE â€” UMich (2021)</div>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="fade-in">
+    <div class="section-label">02 â€” Experience</div>
+    <h2 class="section-title">Where I've Worked</h2>
     <div class="timeline">
       <div class="timeline-item">
-        <div class="timeline-date">2025 &mdash; Present</div>
+        <div class="timeline-date">2022 â€” Present</div>
         <div class="timeline-role">Software Engineer</div>
-        <div class="timeline-company">Barrios Technology &rarr; NASA Johnson Space Center</div>
-        <div class="timeline-desc">Architecting Cortex, building intelligent automation pipelines, and developing cross-platform applications that eliminate manual workflows across human spaceflight operations.</div>
+        <div class="timeline-company">Barrios Technology â†’ NASA Johnson Space Center</div>
+        <div class="timeline-desc">
+          Developing Cortex, a Django-based enterprise platform with EAV architecture that replaced SharePoint workflows for human spaceflight operations. Created AI-specific certification requirements supplementing NASA's NPR 7150.2D standard. Built data management systems with SharePoint-style conditional formatting, dynamic table creation, and AI integration.
+        </div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-date">2023 &mdash; 2025</div>
-        <div class="timeline-role">AI System Engineer, Human Space Flight</div>
-        <div class="timeline-company">NASA Johnson Space Center</div>
-        <div class="timeline-desc">Pioneered AI certification frameworks for human-rated spacecraft. Led requirements traceability, governance frameworks, and systems engineering for Artemis and commercial crew programs.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2022 &mdash; 2023</div>
+        <div class="timeline-date">2021 â€” 2022</div>
         <div class="timeline-role">Engineering Specialist</div>
         <div class="timeline-company">Ford Motor Company</div>
-        <div class="timeline-desc">Led a 20-person eMotor materials lab. Deployed deep learning for automated quality decisions, reducing manual inspection by ~90%. Earned Technical Excellence Award.</div>
+        <div class="timeline-desc">
+          Implemented deep learning models for eMotor technology and AI-driven quality decisions in automotive manufacturing. Received Technical Excellence Award for deploying neural network architectures that improved production quality metrics.
+        </div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-date">2012 &mdash; 2017</div>
-        <div class="timeline-role">Materials &amp; Chemical Technician</div>
-        <div class="timeline-company">Hyundai-Kia &middot; General Motors &middot; Quaker Chemicals</div>
-        <div class="timeline-desc">Where it started. Metallurgical analysis, quality testing, building GM's Flint Engine met lab from scratch. Learned how things are actually made and how they actually fail.</div>
+        <div class="timeline-date">2021</div>
+        <div class="timeline-role">B.S. Mechanical Engineering</div>
+        <div class="timeline-company">University of Michigan, Ann Arbor</div>
+        <div class="timeline-desc">
+          Research on electrochemical detection methods for THC. Developed experience with Kalman filters for image processing, measuring pixel counts and surface areas.
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Projects -->
+  <section id="projects" class="fade-in">
+    <div class="section-label">03 â€” Projects</div>
+    <h2 class="section-title">Featured Work</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">âš™</div>
+        <div class="project-name">Cortex Platform</div>
+        <div class="project-desc">
+          Enterprise data management system built on Django with Entity-Attribute-Value architecture. Replaced legacy SharePoint workflows for NASA's human spaceflight operations with dynamic, configurable data models.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Django</span>
+          <span class="tag">Python</span>
+          <span class="tag">EAV</span>
+          <span class="tag">Enterprise</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">ðŸ›¡</div>
+        <div class="project-name">AI Certification Framework</div>
+        <div class="project-desc">
+          Developed AI-specific requirements supplementing NASA's NPR 7150.2D standard, addressing bias detection, continuous validation, hallucination prevention, and human-AI teaming for safety-critical systems. Currently being generalized for academic publication.
+        </div>
+        <div class="project-tags">
+          <span class="tag">AI Safety</span>
+          <span class="tag">NPR 7150.2D</span>
+          <span class="tag">V&V</span>
+          <span class="tag">Standards</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">ðŸ§ </div>
+        <div class="project-name">Cognitive Twin System</div>
+        <div class="project-desc">
+          Privacy-preserving cognitive readiness prediction for astronaut monitoring using physiological data from WESAD and DEAP datasets. Implemented differential privacy and membership inference attack defenses.
+        </div>
+        <div class="project-tags">
+          <span class="tag">ML</span>
+          <span class="tag">Privacy</span>
+          <span class="tag">Biosignals</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">ðŸ“Š</div>
+        <div class="project-name">Electrochemical THC Detection</div>
+        <div class="project-desc">
+          Published research on novel electrochemical detection methods for THC, combining signal processing with materials science for rapid, accurate biosensing applications.
+        </div>
+        <div class="project-tags">
+          <span class="tag">Research</span>
+          <span class="tag">Signal Processing</span>
+          <span class="tag">Publication</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
   <section id="skills" class="fade-in">
-    <div class="section-label">05 &mdash; Toolkit</div>
-    <h2 class="section-title">What I Bring to the Table</h2>
+    <div class="section-label">04 â€” Skills</div>
+    <h2 class="section-title">Technical Arsenal</h2>
     <div class="skills-grid">
       <div class="skill-group">
-        <h3>Software &amp; Systems</h3>
+        <h3>Languages & Frameworks</h3>
         <div class="skill-item">Python / Django</div>
-        <div class="skill-item">JavaScript / Flutter</div>
-        <div class="skill-item">SQL / PostgreSQL / MySQL</div>
-        <div class="skill-item">REST APIs / AWS</div>
-        <div class="skill-item">Git / Version Control</div>
+        <div class="skill-item">JavaScript</div>
+        <div class="skill-item">SQL / PostgreSQL</div>
+        <div class="skill-item">HTML / CSS</div>
+        <div class="skill-item">REST APIs</div>
       </div>
       <div class="skill-group">
-        <h3>AI &amp; Machine Learning</h3>
-        <div class="skill-item">PyTorch / TensorFlow</div>
-        <div class="skill-item">LLMs / RAG / Transformers</div>
+        <h3>AI & Machine Learning</h3>
+        <div class="skill-item">Deep Learning / Neural Networks</div>
+        <div class="skill-item">Data Mining & Classification</div>
         <div class="skill-item">Differential Privacy</div>
-        <div class="skill-item">AI Safety &amp; Certification</div>
-        <div class="skill-item">LangChain / Vector DBs</div>
+        <div class="skill-item">Regression & Feature Engineering</div>
+        <div class="skill-item">AI Safety & Alignment</div>
       </div>
       <div class="skill-group">
-        <h3>Engineering &amp; Leadership</h3>
+        <h3>Tools & Domains</h3>
         <div class="skill-item">NASA Systems Engineering</div>
         <div class="skill-item">Requirements Traceability</div>
-        <div class="skill-item">MBSE / V&amp;V Lifecycle</div>
-        <div class="skill-item">Black Belt Six Sigma</div>
-        <div class="skill-item">Cross-functional Team Lead</div>
+        <div class="skill-item">Git / Version Control</div>
+        <div class="skill-item">SharePoint Integration</div>
+        <div class="skill-item">Kalman Filters / DSP</div>
       </div>
     </div>
   </section>
 
-  <section class="fade-in">
-    <div class="section-label">06 &mdash; Education</div>
+  <!-- Education -->
+  <section id="education" class="fade-in">
+    <div class="section-label">05 â€” Education</div>
     <h2 class="section-title">Academic Background</h2>
     <div class="edu-grid">
-      <div class="edu-card"><div class="edu-degree">M.S. Artificial Intelligence</div><div class="edu-school">University of Michigan</div><div class="edu-year">Expected May 2026</div></div>
-      <div class="edu-card"><div class="edu-degree">B.S. Mechanical Engineering</div><div class="edu-school">University of Michigan</div><div class="edu-year">2021</div></div>
+      <div class="edu-card">
+        <div class="edu-degree">M.S. Artificial Intelligence</div>
+        <div class="edu-school">University of Michigan-Dearborn</div>
+        <div class="edu-year">Expected May 2026</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">B.S. Mechanical Engineering</div>
+        <div class="edu-school">University of Michigan, Ann Arbor</div>
+        <div class="edu-year">2021</div>
+      </div>
     </div>
   </section>
 
+  <!-- Awards, Publication & Certifications -->
   <section class="fade-in">
-    <div class="section-label">07 &mdash; Recognition</div>
-    <h2 class="section-title">Awards &amp; Honors</h2>
+    <div class="section-label">06 — Recognition & Credentials</div>
+    <h2 class="section-title">Awards & Credentials</h2>
+
+    <!-- Awards -->
     <div class="awards-list">
       <div class="award-item">
-        <div class="award-icon">&#x1F43B;</div>
-        <div><div class="award-name">NASA Silver Bear Award</div><div class="award-org">Certification of Artificial Intelligence on Human-Rated Space Flight Systems</div></div>
+        <div class="award-icon">🐻</div>
+        <div>
+          <div class="award-name">NASA Silver Bear Award</div>
+          <div class="award-org">For developing AI certification requirements supplementing NPR 7150.2D for human-rated spaceflight systems</div>
+        </div>
       </div>
       <div class="award-item">
-        <div class="award-icon">&#x26A1;</div>
-        <div><div class="award-name">Ford Technical Excellence Award</div><div class="award-org">Implementation of Deep Learning Model Technology for Quality Decisions</div></div>
+        <div class="award-icon">⚡</div>
+        <div>
+          <div class="award-name">Technical Excellence Award</div>
+          <div class="award-org">Ford Motor Company — Deep learning implementation for manufacturing quality decisions</div>
+        </div>
       </div>
+    </div>
+
+    <!-- Publication -->
+    <div class="subsection-label">Publication</div>
+    <a href="/papers/thc-detection.pdf" target="_blank" class="pub-card">
+      <div class="pub-type">Peer-Reviewed Research</div>
+      <div class="pub-title">Differential pulsed voltammetry of Δ9-THC on disposable screen-printed carbon electrodes: A potential in-field method to detect Δ9-THC in saliva</div>
+      <div class="pub-meta">2023 — University of Michigan</div>
+      <div class="pub-link-hint">↗ View Paper</div>
+    </a>
+
+    <!-- Certifications -->
+    <div class="subsection-label">Certifications & Training</div>
+    <div class="certs-grid">
+      <a href="/certs/systems-engineering.pdf" target="_blank" class="cert-card">
+        <div class="cert-icon">🚀</div>
+        <div>
+          <div class="cert-name">Systems Engineering: Principles & Design Process</div>
+          <div class="cert-issuer">NASA — Feb 2024</div>
+        </div>
+        <div class="cert-link-hint">↗</div>
+      </a>
+      <a href="/certs/aws-data.pdf" target="_blank" class="cert-card">
+        <div class="cert-icon">☁</div>
+        <div>
+          <div class="cert-name">AWS: Data Silos, Lakes, & Streams</div>
+          <div class="cert-issuer">NASA — Feb 2024</div>
+        </div>
+        <div class="cert-link-hint">↗</div>
+      </a>
+      <a href="/certs/computer-vision.pdf" target="_blank" class="cert-card">
+        <div class="cert-icon">👁</div>
+        <div>
+          <div class="cert-name">AI & Computer Vision</div>
+          <div class="cert-issuer">NASA — Oct 2023</div>
+        </div>
+        <div class="cert-link-hint">↗</div>
+      </a>
+      <a href="/certs/agile.pdf" target="_blank" class="cert-card">
+        <div class="cert-icon">⟳</div>
+        <div>
+          <div class="cert-name">Agile: Key Exam Concepts</div>
+          <div class="cert-issuer">NASA — Mar 2024</div>
+        </div>
+        <div class="cert-link-hint">↗</div>
+      </a>
+      <a href="/certs/python-coursera.pdf" target="_blank" class="cert-card">
+        <div class="cert-icon">🐍</div>
+        <div>
+          <div class="cert-name">Programming for Everybody (Python)</div>
+          <div class="cert-issuer">University of Michigan / Coursera — Dec 2023</div>
+        </div>
+        <div class="cert-link-hint">↗</div>
+      </a>
     </div>
   </section>
 
+
+  <!-- Contact -->
   <section id="contact" class="contact-section fade-in">
-    <div class="section-label" style="justify-content: center;">08 &mdash; Contact</div>
-    <h2 class="contact-title">Let's Solve Something</h2>
-    <p class="contact-sub">If you have got a hard problem that needs someone who will care about it as much as you do, let's talk.</p>
+    <div class="section-label" style="justify-content: center;">07 â€” Contact</div>
+    <h2 class="contact-title">Let's Connect</h2>
+    <p class="contact-sub">Open to aerospace AI opportunities, research collaborations, and interesting conversations.</p>
     <div class="contact-links">
-      <a href="mailto:Kevinjw@umich.edu" class="contact-link">&#x2709; Email</a>
-      <a href="https://github.com/kevinjohnwilliams" class="contact-link" target="_blank">&#x25C6; GitHub</a>
-      <a href="/resume.pdf" class="contact-link">&#x2193; Resume</a>
+      <a href="mailto:your.email@example.com" class="contact-link">âœ‰ Email</a>
+      <a href="https://github.com/yourusername" class="contact-link" target="_blank">â—† GitHub</a>
+      <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">â–ª LinkedIn</a>
+      <a href="/resume.pdf" class="contact-link">â†“ Resume</a>
     </div>
   </section>
+
 </div>
 
 <footer>
-  <span>&copy; 2026 Kevin Williams. All rights reserved.</span>
+  <span>Â© 2026 Kevin. All rights reserved.</span>
   <span>Built with purpose.</span>
 </footer>
 
 <script>
+  // Scroll-triggered animations
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
   }, { threshold: 0.1 });
+
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth active nav highlighting
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
+
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(section => { const sectionTop = section.offsetTop - 200; if (scrollY >= sectionTop) current = section.getAttribute('id'); });
-    navLinks.forEach(link => { if (!link.classList.contains('nav-page')) { link.style.color = link.getAttribute('href') === '#' + current ? 'var(--accent)' : ''; } });
-  });
-  // Close mobile menu on link click
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      document.querySelector('.nav-links').classList.remove('open');
-      document.querySelector('.hamburger').classList.remove('active');
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 200;
+      if (scrollY >= sectionTop) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === `#${current}`
+        ? 'var(--accent)' : '';
     });
   });
 </script>
+
 </body>
 </html>
