@@ -4,231 +4,390 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kevin Williams</title>
+<meta name="description" content="Kevin Williams — AI researcher and systems engineer, NASA Johnson Space Center (Barrios Technology). Founder, Safety Critical Labs. Safety-critical AI certification for human spaceflight.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #fafafa;
-    --fg: #374151;
-    --fg-dim: #6b7280;
-    --fg-bright: #111827;
-    --accent: #2563eb;
-    --accent-dim: #1d4ed8;
-    --border: #e5e7eb;
-    --card: #f3f4f6;
+    --bg: #ffffff;
+    --fg: #202124;
+    --fg-dim: #5f6368;
+    --fg-faint: #777777;
+    --link: #1a73e8;
+    --link-dark: #174ea6;
+    --border: #dadce0;
+    --border-light: #e8eaed;
+    --row-border: #f1f3f4;
+    --card-bg: #ffffff;
   }
 
-  html { font-size: 17px; }
+  html { font-size: 16px; }
 
   body {
     background: var(--bg);
     color: var(--fg);
-    font-family: 'DM Sans', sans-serif;
-    line-height: 1.7;
-    max-width: 680px;
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 4rem 1.5rem 6rem;
+    padding: 0 1.25rem 5rem;
   }
 
   a {
-    color: var(--accent);
+    color: var(--link);
     text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
   }
-  a:hover { border-bottom-color: var(--accent); }
+  a:hover { text-decoration: underline; }
 
-  h1, h2, h3 { font-family: 'Syne', sans-serif; color: var(--fg-bright); }
-  h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.3rem; }
-  h2 { font-size: 1.1rem; font-weight: 600; color: var(--fg-dim); margin-bottom: 1.5rem; }
-
-  code, .mono { font-family: 'DM Mono', monospace; font-size: 0.85rem; }
-
-  hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2.5rem 0;
-  }
-
-  .header {
+  /* ---- Top bar ---- */
+  .topbar {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 0.5rem;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 1.8rem;
+    font-size: 0.85rem;
+    color: var(--fg-dim);
   }
-  .header img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
+  .topbar .brand {
+    font-size: 1.05rem;
+    color: var(--fg);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---- Profile header ---- */
+  .profile {
+    display: flex;
+    gap: 1.6rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+  .photo {
+    width: 132px;
+    height: 132px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    flex-shrink: 0;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: top;
-    border: 2px solid var(--border);
   }
-  .tagline {
-    font-size: 1rem;
+  .profile h1 {
+    font-size: 1.65rem;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 0.15rem;
+    line-height: 1.3;
+  }
+  .profile .affiliation {
+    font-size: 0.95rem;
+    color: var(--fg);
+    margin-bottom: 0.15rem;
+  }
+  .profile .affiliation .via { color: var(--fg-dim); }
+  .profile .verified {
+    font-size: 0.85rem;
     color: var(--fg-dim);
-    margin-bottom: 1rem;
-    line-height: 1.6;
+    margin-bottom: 0.7rem;
   }
-  .social {
+  .profile .verified .check { color: #1e8e3e; margin-right: 0.25em; }
+  .interests {
     display: flex;
-    gap: 1.2rem;
     flex-wrap: wrap;
-    margin-bottom: 0;
-    font-size: 0.9rem;
+    gap: 0.45rem;
   }
-  .social a { color: var(--fg-dim); }
-  .social a:hover { color: var(--accent); }
-
-  .timeline-entry {
-    margin-bottom: 2.2rem;
-  }
-  .timeline-entry .period {
-    font-family: 'DM Mono', monospace;
+  .interests a {
     font-size: 0.8rem;
-    color: var(--fg-dim);
-    letter-spacing: 0.03em;
-    margin-bottom: 0.3rem;
-  }
-  .timeline-entry h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 0.2rem;
-  }
-  .timeline-entry .org {
-    color: var(--fg-dim);
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-  }
-  .timeline-entry p {
-    font-size: 0.92rem;
-    line-height: 1.65;
-  }
-  .featured {
+    color: var(--link);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    background: var(--card);
-    padding: 1.5rem;
+    border-radius: 999px;
+    padding: 0.12rem 0.7rem;
+    white-space: nowrap;
+  }
+  .interests a:hover { background: #f8f9fa; text-decoration: none; }
+
+  #email-box {
+    font-size: 0.85rem;
+    background: #f8f9fa;
+    border: 1px solid var(--border);
     border-radius: 4px;
-    margin-bottom: 2.5rem;
-  }
-  .featured .period {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--accent);
-    letter-spacing: 0.03em;
-    margin-bottom: 0.3rem;
-  }
-  .featured h3 {
-    font-size: 1.15rem;
-    margin-bottom: 0.2rem;
-  }
-  .featured .org {
-    color: var(--fg-dim);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-  }
-  .featured p {
-    font-size: 0.92rem;
-    line-height: 1.65;
+    padding: 0.1em 0.55em;
+    color: var(--fg);
+    user-select: all;
   }
 
-  .section-title {
-    font-family: 'DM Mono', monospace;
+  /* ---- Two-column layout ---- */
+  .columns {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+  main { flex: 1; min-width: 0; }
+  aside {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  /* ---- Sidebar boxes ---- */
+  .side-box {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    background: var(--card-bg);
+  }
+  .side-box h2 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 0.7rem;
+  }
+  .stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .stats-table td {
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--row-border);
+    color: var(--fg-dim);
+  }
+  .stats-table tr:last-child td { border-bottom: none; }
+  .stats-table td.num {
+    text-align: right;
+    color: var(--fg);
+    font-weight: 500;
+  }
+
+  .mentor {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--row-border);
+  }
+  .mentor:last-child { border-bottom: none; padding-bottom: 0.1rem; }
+  .mentor .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #e8f0fe;
+    color: var(--link-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+  .mentor .name { font-size: 0.9rem; line-height: 1.35; }
+  .mentor .role {
+    font-size: 0.78rem;
+    color: var(--fg-dim);
+    line-height: 1.45;
+    margin-top: 0.1rem;
+  }
+  .mentor .rel {
     font-size: 0.75rem;
+    color: var(--fg-faint);
+    margin-top: 0.15rem;
+  }
+
+  .side-links { list-style: none; font-size: 0.9rem; }
+  .side-links li { padding: 0.3rem 0; border-bottom: 1px solid var(--row-border); }
+  .side-links li:last-child { border-bottom: none; }
+
+  /* ---- Section headers (Scholar table-header style) ---- */
+  .section-title {
+    font-size: 0.78rem;
+    font-weight: 400;
     color: var(--fg-dim);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 1.5rem;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.45rem;
+    margin: 2.4rem 0 1.2rem;
   }
+  main > .section-title:first-child { margin-top: 0; }
 
-  .project {
-    margin-bottom: 1.8rem;
+  /* ---- Featured card ---- */
+  .featured {
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--link);
+    background: #f8f9fa;
+    padding: 1.2rem 1.4rem;
+    border-radius: 6px;
+    margin-bottom: 0.4rem;
   }
-  .project h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-  .project p {
-    font-size: 0.92rem;
-    line-height: 1.65;
-  }
+  .featured .period { font-size: 0.78rem; color: var(--link); letter-spacing: 0.03em; margin-bottom: 0.25rem; }
+  .featured h3 { font-size: 1.08rem; font-weight: 500; margin-bottom: 0.15rem; }
+  .featured .org { color: var(--fg-dim); font-size: 0.88rem; margin-bottom: 0.5rem; }
+  .featured p { font-size: 0.9rem; line-height: 1.65; }
 
-  .pub {
-    margin-bottom: 1.2rem;
+  /* ---- Appointments / experience ---- */
+  .appointment {
+    padding: 0 0 1.6rem;
+    margin-bottom: 1.6rem;
+    border-bottom: 1px solid var(--row-border);
+  }
+  .appointment:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0.6rem; }
+  .appointment .period {
+    font-size: 0.78rem;
+    color: var(--fg-dim);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.2rem;
+  }
+  .appointment h3 { font-size: 1.02rem; font-weight: 500; margin-bottom: 0.1rem; }
+  .appointment .org { color: var(--fg-dim); font-size: 0.88rem; margin-bottom: 0.2rem; }
+  .appointment .advisor {
+    font-size: 0.85rem;
+    color: var(--fg-dim);
+    margin-bottom: 0.55rem;
+  }
+  .appointment .advisor strong { color: var(--fg); font-weight: 500; }
+  .appointment p { font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.6rem; }
+  .appointment p:last-child { margin-bottom: 0; }
+  .appointment ul {
+    list-style: none;
+    margin: 0.4rem 0 0.2rem;
+  }
+  .appointment ul li {
     font-size: 0.9rem;
     line-height: 1.6;
+    padding-left: 1.1rem;
+    position: relative;
+    margin-bottom: 0.55rem;
   }
-  .pub .venue {
+  .appointment ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .appointment ul li .sub-period {
     color: var(--fg-dim);
+    font-size: 0.8rem;
+  }
+
+  /* ---- Publications (Scholar rows) ---- */
+  .pub-row {
+    display: flex;
+    gap: 1.2rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--row-border);
+  }
+  .pub-row:last-child { border-bottom: none; }
+  .pub-main { flex: 1; min-width: 0; }
+  .pub-title { font-size: 0.95rem; line-height: 1.45; color: var(--link); display: inline; }
+  .pub-title.no-link { color: var(--fg); }
+  .pub-authors, .pub-venue {
     font-size: 0.82rem;
-  }
-
-  .award {
-    margin-bottom: 0.8rem;
-    font-size: 0.92rem;
-  }
-  .award span { color: var(--fg-dim); font-size: 0.85rem; }
-
-  .edu {
-    margin-bottom: 1rem;
-  }
-  .edu h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.1rem;
-  }
-  .edu .details {
-    font-size: 0.9rem;
     color: var(--fg-dim);
+    line-height: 1.45;
   }
+  .pub-year {
+    font-size: 0.85rem;
+    color: var(--fg-dim);
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  /* ---- Projects ---- */
+  .project { padding: 0.75rem 0; border-bottom: 1px solid var(--row-border); }
+  .project:last-child { border-bottom: none; }
+  .project h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .project p { font-size: 0.88rem; line-height: 1.6; color: var(--fg); }
+
+  /* ---- Education / awards ---- */
+  .edu { padding: 0.55rem 0; border-bottom: 1px solid var(--row-border); }
+  .edu:last-child { border-bottom: none; }
+  .edu h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.05rem; }
+  .edu .details { font-size: 0.85rem; color: var(--fg-dim); }
+
+  .award { padding: 0.55rem 0; border-bottom: 1px solid var(--row-border); font-size: 0.9rem; }
+  .award:last-child { border-bottom: none; }
+  .award strong { font-weight: 500; }
+  .award span { color: var(--fg-dim); font-size: 0.83rem; }
+
+  .beyond p { font-size: 0.9rem; line-height: 1.65; margin-bottom: 1rem; color: var(--fg); }
 
   .footer {
     margin-top: 3rem;
-    font-size: 0.8rem;
-    color: var(--fg-dim);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-light);
+    font-size: 0.78rem;
+    color: var(--fg-faint);
   }
 
+  /* ---- Responsive ---- */
+  @media (max-width: 860px) {
+    .columns { flex-direction: column; }
+    aside { width: 100%; }
+  }
   @media (max-width: 500px) {
-    html { font-size: 16px; }
-    .header { flex-direction: column; text-align: center; }
-    .social { justify-content: center; }
-    body { padding: 2.5rem 1.2rem 4rem; }
+    html { font-size: 15px; }
+    .profile { flex-direction: column; align-items: center; text-align: center; }
+    .interests { justify-content: center; }
+    .pub-row { flex-direction: column; gap: 0.15rem; }
+    .pub-year { padding-top: 0; }
   }
 </style>
 </head>
 <body>
 
-<!-- Header -->
-<div class="header">
-  <img src="images/esa.jpeg" alt="Kevin Williams">
+<div class="topbar">
+  <span class="brand">Kevin Williams</span>
+  <span>research profile</span>
+</div>
+
+<!-- Profile header -->
+<div class="profile">
+  <div class="photo"><img src="images/esa.jpeg" alt="Kevin Williams"></div>
   <div>
     <h1>Kevin Williams</h1>
-    <h2>Engineer &amp; AI Researcher</h2>
+    <div class="affiliation">
+      AI Researcher &amp; Systems Engineer, NASA Johnson Space Center <span class="via">· Barrios Technology</span>
+    </div>
+    <div class="affiliation">
+      Founder, <a href="https://safetycriticallabs.com">Safety Critical Labs</a>
+    </div>
+    <div class="verified">
+      <span class="check">&#10003;</span>Verified email at umich.edu —
+      <a href="#" id="email-toggle" onclick="document.getElementById('email-box').style.display='inline';this.style.display='none';return false;">show</a>
+      <span id="email-box" style="display:none;">kevinjw@umich.edu</span>
+    </div>
+    <div class="interests">
+      <a href="#appointments">Safety-Critical AI</a>
+      <a href="#projects">AI Certification</a>
+      <a href="#appointments">Human Spaceflight Systems</a>
+      <a href="#appointments">Requirements Engineering</a>
+      <a href="#projects">Computer Vision</a>
+    </div>
   </div>
 </div>
 
-<p class="tagline">
-  I find problems worth solving and build what's needed to solve them.
-  Systems engineer and AI researcher, currently building
-  <a href="https://safetycriticallabs.com">Safety Critical Labs</a>
-  and working on human spaceflight systems at NASA JSC.
-</p>
+<div class="columns">
 
-<div class="social">
-  <a href="https://github.com/kevinjohnwilliams">GitHub</a>
-  <a href="https://orcid.org/0009-0002-3308-3415">ORCID</a>
-  <a href="resume.pdf">Resume</a>
-  <a href="#" id="email-toggle" onclick="document.getElementById('email-box').style.display='inline';this.style.display='none';return false;">Email</a>
-  <span id="email-box" style="display:none;font-family:'DM Mono',monospace;font-size:0.85rem;background:var(--card);border:1px solid var(--border);border-radius:3px;padding:0.2em 0.6em;color:var(--fg-bright);user-select:all;">kevinjw@umich.edu</span>
-</div>
+<main>
 
-<hr>
+<!-- Featured -->
+<h2 class="section-title">Featured</h2>
 
-<!-- Safety Critical Labs — Featured -->
 <div class="featured">
   <div class="period">2025 — present</div>
   <h3>Founder — <a href="https://safetycriticallabs.com">Safety Critical Labs</a></h3>
@@ -243,123 +402,156 @@
   </p>
 </div>
 
-<!-- Experience -->
-<div class="section-title">Experience</div>
+<!-- Research appointments -->
+<h2 class="section-title" id="appointments">Research Appointments</h2>
 
-<div class="timeline-entry">
-  <div class="period">Jan 2026 — present</div>
-  <h3>Systems Engineer / Software Architect</h3>
-  <div class="org">Barrios Technology → NASA Johnson Space Center</div>
+<div class="group">
+<div class="appointment">
+  <div class="period">Oct 2023 — present</div>
+  <h3>Researcher, Systems Engineering &amp; Integration — Human Spaceflight</h3>
+  <div class="org">NASA Johnson Space Center · Barrios Technology</div>
+  <div class="advisor">
+    Mentor: <strong><a href="https://www.nasa.gov/centers-and-facilities/johnson/meet-hector-chavez-leading-johnsons-giant-leap-into-low-earth-orbit/">Hector Chavez</a></strong>
+    — Systems Integration Team Lead, Commercial Low Earth Orbit Development Program (CLDP), NASA JSC
+  </div>
   <p>
-    Designing and building the EHP Program Hub Dashboard, cataloging 100+ tools across 9
-    offices to consolidate tool visibility for the Extravehicular Activity and Human Surface
-    Mobility Program, with planned extension to CLDP, ISS, and other programs. Delivered as
-    a vanilla HTML/CSS/JS single-file SPA per deliberate audit-friendly deployment constraints,
-    coordinating with IT staff for structured data collection across offices.
+    A sustained research arc at the intersection of systems engineering and AI assurance for
+    human spaceflight: how do you certify data-driven, probabilistic systems for missions
+    where failure is not an option? The core thread — commercial partner review and AI
+    requirements research on CLDP Systems Integration — was carried out under Hector Chavez's
+    mentorship, alongside applied AI and data systems work delivered through Barrios Technology.
   </p>
+  <ul>
+    <li>
+      <span class="sub-period">CLDP Systems Engineering &amp; Integration (2023 — 2025)</span> —
+      Served as NASA SE&amp;I reviewer across four CLDP commercial partners, conducting ~40
+      reviews in 9 months, including CDPO-delegated lead review authority for Blue Origin;
+      generated RFAs and RIDs reported directly to the Program Office that drove
+      partner-implemented design changes. Led requirements traceability for CLDP, tracing
+      300+ requirements to CLDP-REQ-1130 and delivering a unified baseline spanning three
+      commercial providers, adopted by the Program Office and NASA.
+    </li>
+    <li>
+      <span class="sub-period">AI requirements research (2023 — 2025)</span> —
+      Authored 70 requirements in a new AI requirements framework for safety-critical
+      spaceflight systems, with SME consultation from the University of Michigan, FAA, ISO,
+      and NASA; cofounded the AI-in-Flight working group and contributed to integrating AI
+      into NASA's Software Engineering Handbook.
+    </li>
+    <li>
+      <span class="sub-period">Applied AI &amp; data systems (2025 — present)</span> —
+      Architected Cortex, an enterprise data platform with integrated LLM capabilities
+      (chat-based CRUD, inline suggestions, data extraction) for Intuitive Machines —
+      Barrios-internal client work built on Django/EAV/MySQL, deployed internally at Barrios
+      for dev/test validation and delivered to customer-readiness stage. Currently designing
+      the EHP Program Hub Dashboard at NASA JSC, cataloging 100+ tools across 9 offices for
+      the Extravehicular Activity and Human Surface Mobility Program, with planned extension
+      to CLDP, ISS, and other programs.
+    </li>
+    <li>
+      <span class="sub-period">Earlier NASA work (2023 — 2024)</span> —
+      Evaluated Flight Test Objectives across 18 Orion subsystems toward the Artemis I Flight
+      Analysis Report; traced SSP 51074 CERD requirements for Axiom Space docking integration
+      with ISS through SRR.
+    </li>
+  </ul>
 </div>
 
-<div class="timeline-entry">
-  <div class="period">Feb 2025 — Dec 2025</div>
-  <h3>Software Engineer</h3>
-  <div class="org">Barrios Technology</div>
+<div class="appointment">
+  <div class="period">Sep 2019 — Jun 2022</div>
+  <h3>Research Assistant, Meyerhoff Group</h3>
+  <div class="org">Department of Chemistry, University of Michigan</div>
+  <div class="advisor">
+    Advisor: <strong><a href="https://lsa.umich.edu/chem/people/emeritus/mmeyerho.html">Prof. Mark E. Meyerhoff</a></strong>
+    — Philip J. Elving Collegiate Professor Emeritus of Chemistry, University of Michigan
+  </div>
   <p>
-    Architected and built Cortex, an enterprise data platform with integrated LLM capabilities
-    (chat-based CRUD, inline suggestions, and data extraction) for Intuitive Machines, built
-    on Django with an EAV architecture and MySQL backend. Deployed internally at Barrios for
-    dev/test validation and delivered to customer-readiness stage. Continued part-time
-    development of the CLDP AI requirements framework during this period, maintaining
-    continuity of the safety-critical AI certification effort.
+    Electroanalytical chemistry research in the Meyerhoff group, whose work centers on
+    electrochemical and optical sensors for clinically important analytes. Developed a novel
+    electrochemical detection method for Δ9-THC (1–20&nbsp;μM) achieving 0.13&nbsp;μM limit
+    of detection with R²&nbsp;=&nbsp;0.995 — the third-lowest detection limit among
+    comparable screen-printed carbon electrode devices. Published peer-reviewed findings
+    demonstrating viability for in-field saliva testing.
   </p>
 </div>
-
-<div class="timeline-entry">
-  <div class="period">Oct 2023 — Feb 2025</div>
-  <h3>Systems Engineer</h3>
-  <div class="org">Barrios Technology → NASA Johnson Space Center</div>
-  <p>
-    Served as NASA SE&amp;I reviewer across four CLDP commercial partners, conducting ~40
-    reviews in 9 months, including CDPO-delegated lead review authority for Blue Origin,
-    and generating RFAs and RIDs reported directly to the Program Office that drove
-    partner-implemented design changes. Led requirements traceability for CLDP, tracing
-    300+ requirements to CLDP-REQ-1130 and delivering a unified baseline adopted by the
-    Program Office, NASA, and all three partners. Authored 70 requirements in a new AI
-    requirements framework with SME consultation from the University of Michigan, FAA, ISO,
-    and NASA, cofounding the AI-in-Flight working group. Earlier: evaluated Flight Test
-    Objectives across 18 Orion subsystems toward the Artemis I Flight Analysis Report; traced
-    SSP 51074 CERD requirements for Axiom Space docking integration with ISS through SRR.
-  </p>
 </div>
 
-<div class="timeline-entry">
+<!-- Industry experience -->
+<h2 class="section-title">Industry Experience</h2>
+
+<div class="group">
+<div class="appointment">
   <div class="period">Jun 2022 — Sep 2023</div>
   <h3>Engineering Specialist</h3>
   <div class="org">Ford Motor Company</div>
   <p>
-    Launched and led a 20-person eMotor materials laboratory (12 hourly, 8 salary) on 24/7
-    shift coverage, testing stators and rotors at hundreds of parts per week for F-150 Lightning
-    and Maverick Hybrid programs. Owned full lab buildup (equipment acquisition, hiring,
-    procedure development, calibration) through ISO certification and production readiness.
+    Launched and led a 20-person eMotor materials laboratory on 24/7 shift coverage, testing
+    stators and rotors at hundreds of parts per week for F-150 Lightning and Maverick Hybrid
+    programs — full lab buildup through ISO certification and production readiness.
     Self-initiated a PyTorch computer vision pipeline (regression with Kalman-filtered
-    segmentation) for varnish surface area measurement on eMotor stators, achieving 99% accuracy
-    and saving 1+ hour per quality check. Conducted failure analysis and supplier investigations
-    driving DFMEA/PFMEA iterations.
+    segmentation) for varnish surface area measurement on eMotor stators, achieving 99%
+    accuracy and saving 1+ hour per quality check.
   </p>
 </div>
 
-<div class="timeline-entry">
-  <div class="period">Sep 2019 — Jun 2022</div>
-  <h3>Research Assistant</h3>
-  <div class="org">University of Michigan</div>
-  <p>
-    Developed novel electrochemical detection method for Δ9-THC (1–20&nbsp;μM) achieving
-    0.13&nbsp;μM limit of detection with R²&nbsp;=&nbsp;0.995, third-lowest detection limit
-    among comparable SPCE devices. Published peer-reviewed findings demonstrating viability
-    for in-field applications.
-  </p>
-</div>
-
-<div class="timeline-entry">
+<div class="appointment">
   <div class="period">2012 — 2017</div>
   <h3>Materials &amp; Chemical Technician</h3>
   <div class="org">Quaker Chemical · General Motors · Hyundai-Kia</div>
   <p>
     Metallurgical analysis, material validation, and quality testing across automotive OEMs
-    and suppliers. Delivered QA protocol training at Quaker Chemical (2012–2015). Established
-    the metallurgical lab supporting the 2017 SGE crankshaft line at GM Flint Engine
-    (2015–2016). Led supplier corrective actions, material validation, and quality testing
-    at Hyundai-Kia (2017).
+    and suppliers. Established the metallurgical lab supporting the 2017 SGE crankshaft line
+    at GM Flint Engine; led supplier corrective actions and material validation at Hyundai-Kia.
   </p>
 </div>
-
-<hr>
-
-<!-- Education -->
-<div class="section-title">Education</div>
-
-<div class="edu">
-  <h3>M.S. Artificial Intelligence</h3>
-  <div class="details">University of Michigan · May 2026</div>
 </div>
 
-<div class="edu">
-  <h3>B.S. Mechanical Engineering</h3>
-  <div class="details">University of Michigan · 2021 · Featured in U-M ME150</div>
+<!-- Publications -->
+<h2 class="section-title" id="publications">Publications</h2>
+
+<div class="group">
+<div class="pub-row">
+  <div class="pub-main">
+    <a class="pub-title" href="https://doi.org/10.5281/zenodo.19024420">Requirements and Verification Standards for Artificial Intelligence in Safety-Critical Applications</a>
+    <div class="pub-authors">K. Williams</div>
+    <div class="pub-venue">Safety Critical Labs · <a href="https://doi.org/10.5281/zenodo.19024420">Zenodo</a> · v3.5</div>
+  </div>
+  <div class="pub-year">2026</div>
 </div>
 
-<hr>
+<div class="pub-row">
+  <div class="pub-main">
+    <a class="pub-title" href="https://ssrn.com/abstract=6875639">AI Requirements Framework for Safety-Critical Systems: Requirements and Verification Standards for Artificial Intelligence in Safety-Critical Applications</a>
+    <div class="pub-authors">K. Williams</div>
+    <div class="pub-venue">Safety Critical Labs · <a href="https://ssrn.com/abstract=6875639">SSRN</a></div>
+  </div>
+  <div class="pub-year">2026</div>
+</div>
 
-<!-- Research Projects -->
-<div class="section-title">Research Projects</div>
+<div class="pub-row">
+  <div class="pub-main">
+    <a class="pub-title" href="papers/thc-detection.pdf">Differential pulsed voltammetry of Δ9-Tetrahydrocannabinol (THC) on disposable screen-printed carbon electrodes: A potential in-field method to detect Δ9-THC in saliva</a>
+    <div class="pub-authors">K.J. Williams, C.J. White, A.P. Hunt, M.E. Meyerhoff</div>
+    <div class="pub-venue">Electroanalysis, 35, e202200451 · Wiley-VCH</div>
+  </div>
+  <div class="pub-year">2023</div>
+</div>
+</div>
 
+<!-- Research projects -->
+<h2 class="section-title" id="projects">Research Projects</h2>
+
+<div class="group">
 <div class="project">
   <h3>AI Requirements Framework</h3>
   <p>
-    Open standard for certifying AI in safety-critical systems. Ten requirements
-    (AI-1 through AI-10) covering operational and data foundations, bias, ML test coverage,
-    continuous validation, hallucination, out-of-distribution detection, adversarial
-    robustness, explainability, human-AI teaming, and privacy. Gap analysis confirmed no
-    existing standard adequately addresses AI-specific failure modes in human spaceflight.
+    Open standard for certifying AI in safety-critical systems, spanning thirteen requirement
+    areas (AI-1 through AI-13): operational and data foundations, AI bias, ML test coverage,
+    continuous validation, hallucination prevention, out-of-distribution detection,
+    adversarial robustness, explainability, human-AI teaming, privacy and data protection,
+    multi-model systems, neural network requirements, and continuous learning and adaptation.
+    Gap analysis confirmed no existing standard adequately addresses AI-specific failure
+    modes in human spaceflight.
   </p>
 </div>
 
@@ -390,52 +582,104 @@
     first-responder deployment readiness.
   </p>
 </div>
-
-<hr>
-
-<!-- Publications -->
-<div class="section-title">Publications</div>
-
-<div class="pub">
-  Requirements and Verification Standards for Artificial Intelligence in Safety-Critical Applications<br>
-  <span class="venue">Kevin Williams · Safety Critical Labs · Zenodo, 2026</span>
 </div>
 
-<div class="pub">
-  <a href="papers/thc-detection.pdf">Differential pulsed voltammetry of Δ9-THC on disposable screen-printed carbon electrodes: A potential in-field method to detect Δ9-THC in saliva</a><br>
-  <span class="venue">2023 · University of Michigan</span>
+<!-- Education -->
+<h2 class="section-title">Education</h2>
+
+<div class="group">
+<div class="edu">
+  <h3>M.S. Artificial Intelligence</h3>
+  <div class="details">University of Michigan · May 2026</div>
 </div>
 
-<hr>
+<div class="edu">
+  <h3>B.S. Mechanical Engineering</h3>
+  <div class="details">University of Michigan · 2021 · <a href="https://me.engin.umich.edu/me150/make-your-mark/share-your-story/#:~:text=Kevin%20Williams%20%E2%80%93%20Current%20Student">Featured in U-M ME150 "Make Your Mark"</a></div>
+</div>
+</div>
 
 <!-- Awards -->
-<div class="section-title">Awards</div>
+<h2 class="section-title">Awards</h2>
 
+<div class="group">
 <div class="award">
   <strong>NASA Silver Bear Award</strong> <span>HSFTIC, July 2025 · Leading role integrating AI into NASA's Software Engineering Handbook</span>
 </div>
 <div class="award">
   <strong>Ford Technical Excellence Award</strong> <span>June 2023 · Deep learning for eMotor stator varnish inspection</span>
 </div>
-
-<hr>
+</div>
 
 <!-- Beyond -->
-<div class="section-title">Beyond the Code</div>
+<h2 class="section-title">Beyond the Code</h2>
 
-<p style="font-size: 0.92rem; line-height: 1.65; margin-bottom: 1rem;">
-  Working on machines that behave human pulled me into the philosophy of being one.
-  I see us as spiritual creatures with intellect, manifest physically. Conscience is
-  the first-person experience of that. Love is the quiet recognition upon being shared.
-  Faith in something of value sets the roots, and belief and morals branch from there.
-</p>
+<div class="beyond">
+  <p>
+    Working on machines that behave human pulled me into the philosophy of being one.
+    I see us as spiritual creatures with intellect, manifest physically. Conscience is
+    the first-person experience of that. Love is the quiet recognition upon being shared.
+    Faith in something of value sets the roots, and belief and morals branch from there.
+  </p>
+  <p>
+    I train every day, produce music, and still want to be an astronaut. I don't have
+    social media. I'd rather be known for what I build and how I treat people than for
+    a curated presence.
+  </p>
+</div>
 
-<p style="font-size: 0.92rem; line-height: 1.65; margin-bottom: 1rem;">
-  I train every day, produce music, and still want to be an astronaut. I don't have
-  social media. I'd rather be known for what I build and how I treat people than for
-  a curated presence.
-</p>
+</main>
 
+<aside>
+
+  <div class="side-box">
+    <h2>At a glance</h2>
+    <table class="stats-table">
+      <tr><td>NASA SE&amp;I reviews conducted</td><td class="num">~40</td></tr>
+      <tr><td>Requirements traced (CLDP)</td><td class="num">300+</td></tr>
+      <tr><td>AI requirements authored</td><td class="num">70</td></tr>
+      <tr><td>Publications</td><td class="num">3</td></tr>
+      <tr><td>Awards</td><td class="num">2</td></tr>
+    </table>
+  </div>
+
+  <div class="side-box">
+    <h2>Mentors &amp; Advisors</h2>
+    <div class="mentor">
+      <div class="avatar">MM</div>
+      <div>
+        <div class="name"><a href="https://lsa.umich.edu/chem/people/emeritus/mmeyerho.html">Mark E. Meyerhoff</a></div>
+        <div class="role">Philip J. Elving Collegiate Professor Emeritus of Chemistry, University of Michigan</div>
+        <div class="rel">Research advisor · 2019 — 2022</div>
+      </div>
+    </div>
+    <div class="mentor">
+      <div class="avatar">HC</div>
+      <div>
+        <div class="name"><a href="https://www.nasa.gov/centers-and-facilities/johnson/meet-hector-chavez-leading-johnsons-giant-leap-into-low-earth-orbit/">Hector Chavez</a></div>
+        <div class="role">Systems Integration Team Lead, Commercial LEO Development Program, NASA Johnson Space Center</div>
+        <div class="rel">NASA mentor · 2023 — present</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-box">
+    <h2>Links</h2>
+    <ul class="side-links">
+      <li><a href="https://github.com/kevinjohnwilliams">GitHub</a></li>
+      <li><a href="https://orcid.org/0009-0002-3308-3415">ORCID</a></li>
+      <li><a href="https://safetycriticallabs.com">Safety Critical Labs</a></li>
+      <li><a href="resume.pdf">Resume (PDF)</a></li>
+    </ul>
+  </div>
+
+</aside>
+
+</div>
+
+<div class="footer">
+  Kevin Williams · Houston, TX · Last updated July 2026
+</div>
 
 </body>
 </html>
